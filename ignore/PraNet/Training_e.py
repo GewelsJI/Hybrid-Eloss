@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import numpy as np
 from datetime import datetime
 from torchvision.utils import make_grid
-from PraNet.lib.PraNet_Res2Net import PraNet
+from scripts.PraNet.lib.PraNet_Res2Net import PraNet
 from utils.data_RGB import get_loader, test_dataset
 from utils.utils import clip_gradient, adjust_lr
 from tensorboardX import SummaryWriter

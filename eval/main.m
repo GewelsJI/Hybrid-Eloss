@@ -135,7 +135,7 @@ for d = 1:datasetNum
         meanSen = mean(column_Sen);
         maxSen = max(column_Sen);
         
-        %,Specificity
+        %Specificity
         column_Spe = mean(threshold_Specificity,1);
         meanSpe = mean(column_Spe);
         maxSpe = max(column_Spe);

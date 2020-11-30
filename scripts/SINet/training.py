@@ -4,8 +4,8 @@ import torch.nn.functional as F
 import numpy as np
 from datetime import datetime
 from torchvision.utils import make_grid
-from SCRN.lib.ResNet_models import SCRN
-from utils.data_SCRN import get_loader, test_dataset
+from scripts.SINet.lib.SINet import SINet_ResNet50
+from utils.data_RGB import get_loader, test_dataset
 from utils.utils import clip_gradient, adjust_lr
 from tensorboardX import SummaryWriter
 from utils.loss_function import *
@@ -14,23 +14,22 @@ import torch.backends.cudnn as cudnn
 
 
 # train function
-def train(train_loader, model, optimizer, epoch, save_path, writer):
+def train(train_loader, model, optimizer, epoch, save_path, writer, cur_loss):
     global step
     model.train()
     loss_all = 0
     epoch_step = 0
     try:
-        for i, (images, gts, depths) in enumerate(train_loader, start=1):
+        for i, (images, gts) in enumerate(train_loader, start=1):
             optimizer.zero_grad()
 
             images = images.cuda()
             gts = gts.cuda()
-            depths = depths.cuda()
 
             preds = model(images)
 
-            loss_init = wiou_loss(preds[0], gts)
-            loss_final = wiou_loss(preds[1], depths)
+            loss_init = cur_loss(preds[0], gts)
+            loss_final = cur_loss(preds[1], gts)
 
             loss = loss_init + loss_final
 
@@ -92,15 +91,14 @@ def val(test_loader, model, epoch, save_path, writer):
     with torch.no_grad():
         mae_sum = 0
         for i in range(test_loader.size):
-            image, gt, _, name, img_for_post = test_loader.load_data()
+            image, gt, name, img_for_post = test_loader.load_data()
             gt = np.asarray(gt, np.float32)
             gt /= (gt.max() + 1e-8)
             image = image.cuda()
-            # depth = depth.cuda()
 
             res = model(image)
 
-            res = F.upsample(res[0], size=gt.shape, mode='bilinear', align_corners=False)
+            res = F.upsample(res[1], size=gt.shape, mode='bilinear', align_corners=False)
             res = res.sigmoid().data.cpu().numpy().squeeze()
             res = (res - res.min()) / (res.max() - res.min() + 1e-8)
             mae_sum += np.sum(np.abs(res - gt)) * 1.0 / (gt.shape[0] * gt.shape[1])
@@ -124,19 +122,33 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--epoch', type=int, default=101, help='epoch number')
-    parser.add_argument('--lr', type=float, default=2e-3, help='learning rate')
-    parser.add_argument('--batchsize', type=int, default=48, help='training batch size')
+    parser.add_argument('--lr', type=float, default=1e-4, help='learning rate')
+    parser.add_argument('--batchsize', type=int, default=36, help='training batch size')
     parser.add_argument('--trainsize', type=int, default=352, help='training dataset size')
     parser.add_argument('--clip', type=float, default=0.5, help='gradient clipping margin')
     parser.add_argument('--decay_rate', type=float, default=0.1, help='decay rate of learning rate')
     parser.add_argument('--decay_epoch', type=int, default=60, help='every n epochs decay learning rate')
     parser.add_argument('--load', type=str, default=None, help='train from checkpoints')
     parser.add_argument('--gpu_id', type=str, default='0', help='train use gpu')
-    parser.add_argument('--train_root', type=str, default='/media/nercms/NERCMS/Dataset/SOD/TrainDataset/',
+    parser.add_argument('--train_root', type=str, default='/media/nercms/NERCMS/GepengJi/2020ACMMM/Dataset/COD_New_data/TrainDataset/',
                         help='the training rgb images root')
+    parser.add_argument('--val_root', type=str, default='/media/nercms/NERCMS/GepengJi/2020ACMMM/Dataset/COD_New_data/TestDataset/COD10K/',
+                        help='the test rgb images root')
     parser.add_argument('--save_path', type=str,
-                        default='./snapshot/1021_SCRN_wiou/', help='the path to save model and log')
+                        default='./snapshot/1011_SINet_bei/', help='the path to save model and log')
     opt = parser.parse_args()
+
+    # loss selection
+    if opt.loss_type == 'bei':
+        cur_loss = wce_wiou_e_loss
+    elif opt.loss_type == 'wce':
+        cur_loss = wce_loss
+    elif opt.loss_type == 'wiou':
+        cur_loss = wiou_loss
+    elif opt.loss_type == 'e':
+        cur_loss = e_loss
+    else:
+        raise Exception('No Type Matching')
 
     # set the device for training
     if opt.gpu_id == '0':
@@ -148,13 +160,14 @@ if __name__ == '__main__':
     cudnn.benchmark = True
 
     # build the model
-    model = SCRN(channel=32).cuda()
+    model = SINet_ResNet50(channel=32).cuda()
+    # model = torch.nn.DataParallel(model, device_ids=[0, 1])
 
     if opt.load is not None:
         model.load_state_dict(torch.load(opt.load))
         print('load model from ', opt.load)
 
-    optimizer = torch.optim.SGD(model.parameters(), opt.lr, momentum=0.9, weight_decay=5e-4)
+    optimizer = torch.optim.Adam(model.parameters(), opt.lr)
 
     save_path = opt.save_path
     if not os.path.exists(save_path):
@@ -162,15 +175,13 @@ if __name__ == '__main__':
 
     # load data
     print('load data...')
-    train_loader = get_loader(image_root=opt.train_root + 'DUTS-TR-Image/',
-                              gt_root=opt.train_root + 'DUTS-TR-Mask/',
-                              depth_root=opt.train_root + 'DUTS-TR-Edge/',
+    train_loader = get_loader(image_root=opt.train_root + 'Imgs/',
+                              gt_root=opt.train_root + 'GT/',
                               batchsize=opt.batchsize,
                               trainsize=opt.trainsize,
                               num_workers=8)
-    val_loader = test_dataset(image_root='/media/nercms/NERCMS/Dataset/SOD/TestDataset/SalMap/MSRA-B-test/',
-                              gt_root='/media/nercms/NERCMS/Dataset/SOD/TestDataset/GT/MSRA-B-test/',
-                              depth_root='/media/nercms/NERCMS/Dataset/SOD/TestDataset/Edge/MSRA-B-test/',
+    val_loader = test_dataset(image_root=opt.val_root + 'Imgs/',
+                              gt_root=opt.val_root + 'GT/',
                               testsize=opt.trainsize)
     total_step = len(train_loader)
 
@@ -193,5 +204,5 @@ if __name__ == '__main__':
     for epoch in range(1, opt.epoch):
         cur_lr = adjust_lr(optimizer, opt.lr, epoch, opt.decay_rate, opt.decay_epoch)
         writer.add_scalar('learning_rate', cur_lr, global_step=epoch)
-        train(train_loader, model, optimizer, epoch, save_path, writer)
+        train(train_loader, model, optimizer, epoch, save_path, writer, cur_loss)
         val(val_loader, model, epoch, save_path, writer)
