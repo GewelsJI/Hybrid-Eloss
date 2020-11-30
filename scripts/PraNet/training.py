@@ -138,7 +138,7 @@ if __name__ == '__main__':
 
     # loss selection
     if opt.loss_type == 'bei':
-        cur_loss = wce_wiou_e_loss
+        cur_loss = hybrid_e_loss
     elif opt.loss_type == 'wce':
         cur_loss = wce_loss
     elif opt.loss_type == 'wiou':
