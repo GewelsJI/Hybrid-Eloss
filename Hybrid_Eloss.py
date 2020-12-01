@@ -4,10 +4,15 @@ import torch.nn.functional as F
 
 def hybrid_e_loss(pred, mask):
     """
-        SciChina-Hybrid Eloss-2020
-    :param pred:
-    :param mask:
-    :return:
+    Introduction: 
+        Hybrid Eloss
+    Paramaters:
+        :param pred:
+        :param mask:
+        :return:
+    Usage:
+        loss = hybrid_e_loss(prediction_map, gt_mask)
+        loss.backward()
     """
     # adaptive weighting mask
     weit = 1 + 5 * torch.abs(F.avg_pool2d(mask, kernel_size=31, stride=1, padding=15) - mask)
