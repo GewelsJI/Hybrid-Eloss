@@ -75,48 +75,60 @@ To verify the effectiveness of our Hybrid Eloss, we employ it to existing task i
 
 ### Task-1: Salient Object detection
 
-SCRN
+The model, termed __SCRN__, is borrowed from __Stacked Cross Refinement Network for Edge-Aware Salient Object Detection__. (ICCV-2019, [GitHub](https://github.com/wuzhe71/SCRN), [Paper](http://openaccess.thecvf.com/content_ICCV_2019/papers/Wu_Stacked_Cross_Refinement_Network_for_Edge-Aware_Salient_Object_Detection_ICCV_2019_paper.pdf), [Supplementary Materials](http://openaccess.thecvf.com/content_ICCV_2019/supplemental/Wu_Stacked_Cross_Refinement_ICCV_2019_supplemental.pdf))
 
 - Data Preparation
   
-  Download the training ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/f1a290c1a60e49)) and tetsting ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/f8bb4f9ae7dc48)) set and put it into `./data/SOD/`.
+  Download the training ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/f1a290c1a60e49)) and tetsting ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/f8bb4f9ae7dc48)) set and put it into `./data/SOD/`
 
 - Training
   
-  Choose the differnt type of loss function in [link]() and just run `python ./scripts/SCRN/training.py`
+  Choose the differnt type of loss function in parser (`--loss_type`) and just run `python ./scripts/SCRN/training.py`
 
 - Testing
   
-  Download the pretrained weights ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/274315f1acc345)) and put them into `./snapshots/SCRN/`.
+  Download the pretrained weights ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/274315f1acc345)) and put them into `./snapshots/SCRN/`. Just run `python ./scripts/SCRN/inference.py`
 
 - Results
 
+  Result map can be downloaded from this link: [Cowtransfer Drive](https://gepengji.cowtransfer.com/s/e08892ed817444).
+
 ### Task-2: Camouflaged Object Segmentation
 
-SINet
+The model, termed SINet, is borrowed from Camouflaged Object Detection (CVPR-2020, [Github](https://github.com/DengPingFan/SINet), [Paper](https://openaccess.thecvf.com/content_CVPR_2020/papers/Fan_Camouflaged_Object_Detection_CVPR_2020_paper.pdf))
 
 - Data Preparation
   
   Download the training ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/1df86d459ada43)) and tetsting ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/4553588aa35a4d)) set and put it into `./data/COS/`.
 
 - Training
+
+  Choose the differnt type of loss function in parser (`--loss_type`) and just run `python ./scripts/SINet/training.py`
+
 - Testing
   
-  Download the pretrained weights ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/2067945a233a41)) and put them into `./snapshots/SINet/`.
+  Download the pretrained weights ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/2067945a233a41)) and put them into `./snapshots/SINet/`. Just run `python ./scripts/SINet/inference.py`
 
 - Results
 
+  Result map can be downloaded from this link: [Cowtransfer Drive](https://gepengji.cowtransfer.com/s/cc4f090df40543).
+
 ### Task-3: Polyp Segmentation
 
-PraNet
+The model, termed __PraNet__, is borrowed from __Parallel Reverse Attention Network for Polyp Segmentation__ (MICCAI-2020, [GitHub](https://github.com/DengPingFan/PraNet), [Paper](https://github.com/DengPingFan/PraNet/blob/master))
 
 - Data Preparation
   
   Download the training ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/f3a7231302294e)) and tetsting ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/278951de7c9840)) set and put it into `./data/PSeg/`.
 
 - Training
+
+  Choose the differnt type of loss function in parser (`--loss_type`) and just run `python ./scripts/PraNet/training.py`
+
 - Testing
   
-  Download the pretrained weights ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/4b13c2f6161a49)) and put them into `./snapshots/PraNet/`.
+  Download the pretrained weights ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/4b13c2f6161a49)) and put them into `./snapshots/PraNet/`. Just run `python ./scripts/PraNet/inference.py`
 
 - Results
+
+  Result map can be downloaded from this link: [Cowtransfer Drive](https://gepengji.cowtransfer.com/s/021f962d99b54d).

@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import torch
 from datetime import datetime
 from torchvision.utils import make_grid
 from scripts.SCRN.lib.ResNet_models import SCRN
@@ -130,6 +131,8 @@ if __name__ == '__main__':
     parser.add_argument('--decay_epoch', type=int, default=60, help='every n epochs decay learning rate')
     parser.add_argument('--load', type=str, default=None, help='train from checkpoints')
     parser.add_argument('--gpu_id', type=str, default='0', help='train use gpu')
+    parser.add_argument('--loss_type', type=str, default='bei',
+    help='the type of loss function')
     parser.add_argument('--train_root', type=str, default='/media/nercms/NERCMS/Dataset/SOD/TrainDataset/',
                         help='the training rgb images root')
     parser.add_argument('--save_path', type=str,
