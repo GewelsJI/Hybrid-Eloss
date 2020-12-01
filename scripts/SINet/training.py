@@ -134,6 +134,7 @@ if __name__ == '__main__':
                         help='the training rgb images root')
     parser.add_argument('--val_root', type=str, default='/media/nercms/NERCMS/GepengJi/2020ACMMM/Dataset/COD_New_data/TestDataset/COD10K/',
                         help='the test rgb images root')
+    parser.add_argument('--loss_type', type=str, default='bei', help='the type of loss function')
     parser.add_argument('--save_path', type=str,
                         default='./snapshot/1011_SINet_bei/', help='the path to save model and log')
     opt = parser.parse_args()
