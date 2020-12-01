@@ -79,15 +79,15 @@ SCRN
 
 - Data Preparation
   
-  Download the training ([Cowtransfer Drive]()) and tetsting ([Cowtransfer Drive]()) set and put it into `./data/SOD/`.
+  Download the training ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/f1a290c1a60e49)) and tetsting ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/f8bb4f9ae7dc48)) set and put it into `./data/SOD/`.
 
 - Training
   
-  Choose the differnt type of loss function in  and just run `python ./scripts/SCRN/training.py`
+  Choose the differnt type of loss function in [link]() and just run `python ./scripts/SCRN/training.py`
 
 - Testing
   
-  Download the pretrained weights ([Cowtransfer Drive]()) and put them into `./snapshots/SCRN/`.
+  Download the pretrained weights ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/274315f1acc345)) and put them into `./snapshots/SCRN/`.
 
 - Results
 
@@ -97,24 +97,26 @@ SINet
 
 - Data Preparation
   
-  Download the training ([Cowtransfer Drive]()) and tetsting ([Cowtransfer Drive]()) set and put it into `./data/COS/`.
+  Download the training ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/1df86d459ada43)) and tetsting ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/4553588aa35a4d)) set and put it into `./data/COS/`.
 
 - Training
 - Testing
   
-  Download the pretrained weights ([Cowtransfer Drive]()) and put them into `./snapshots/SINet/`.
+  Download the pretrained weights ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/2067945a233a41)) and put them into `./snapshots/SINet/`.
 
 - Results
 
 ### Task-3: Polyp Segmentation
 
+PraNet
+
 - Data Preparation
   
-  Download the training ([Cowtransfer Drive]()) and tetsting ([Cowtransfer Drive]()) set and put it into `./data/PSeg/`.
+  Download the training ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/f3a7231302294e)) and tetsting ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/278951de7c9840)) set and put it into `./data/PSeg/`.
 
 - Training
 - Testing
   
-  Download the pretrained weights ([Cowtransfer Drive]()) and put them into `./snapshots/PraNet/`.
+  Download the pretrained weights ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/4b13c2f6161a49)) and put them into `./snapshots/PraNet/`.
 
 - Results
