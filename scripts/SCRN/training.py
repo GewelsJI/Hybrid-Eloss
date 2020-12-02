@@ -132,11 +132,9 @@ if __name__ == '__main__':
     parser.add_argument('--load', type=str, default=None, help='train from checkpoints')
     parser.add_argument('--gpu_id', type=str, default='0', help='train use gpu')
     parser.add_argument('--loss_type', type=str, default='bei',
-    help='the type of loss function')
-    parser.add_argument('--train_root', type=str, default='/media/nercms/NERCMS/Dataset/SOD/TrainDataset/',
+                        help='the type of loss function')
+    parser.add_argument('--train_root', type=str, default='../../data/SOD/TrainDataset/',
                         help='the training rgb images root')
-    parser.add_argument('--save_path', type=str,
-                        default='./snapshot/1021_SCRN_bei/', help='the path to save model and log')
     opt = parser.parse_args()
 
     # loss selection
@@ -169,7 +167,7 @@ if __name__ == '__main__':
 
     optimizer = torch.optim.SGD(model.parameters(), opt.lr, momentum=0.9, weight_decay=5e-4)
 
-    save_path = opt.save_path
+    save_path = './snapshot/SCRN_{}/'.format(opt.loss_type)
     if not os.path.exists(save_path):
         os.makedirs(save_path)
 
@@ -181,9 +179,9 @@ if __name__ == '__main__':
                               batchsize=opt.batchsize,
                               trainsize=opt.trainsize,
                               num_workers=8)
-    val_loader = test_dataset(image_root='/media/nercms/NERCMS/Dataset/SOD/TestDataset/SalMap/MSRA-B-test/',
-                              gt_root='/media/nercms/NERCMS/Dataset/SOD/TestDataset/GT/MSRA-B-test/',
-                              depth_root='/media/nercms/NERCMS/Dataset/SOD/TestDataset/Edge/MSRA-B-test/',
+    val_loader = test_dataset(image_root='../../data/SOD/TestDataset//IMG/DUTS-test/',
+                              gt_root='../../data/SOD/TestDataset//GT/DUTS-test/',
+                              depth_root='../../data/SOD/TestDataset//GT/DUTS-test/',
                               testsize=opt.trainsize)
     total_step = len(train_loader)
 

@@ -10,8 +10,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--testsize', type=int, default=352, help='testing size')
 parser.add_argument('--gpu_id', type=str, default='1', help='select gpu id')
 parser.add_argument('--snapshot', type=str,
-                    default='./snapshot/1021_SCRN_bei/Net_epoch_best.pth')
-parser.add_argument('--test_path', type=str, default='/media/nercms/NERCMS/Dataset/SOD/TestDataset/', help='test dataset path')
+                    default='./snapshot/SCRN_bei/Net_epoch_best.pth')
+parser.add_argument('--test_path', type=str, default='../../data/SOD/TestDataset/', help='test dataset path')
 opt = parser.parse_args()
 
 dataset_path = opt.test_path
@@ -23,16 +23,14 @@ model.cuda()
 model.eval()
 
 # test
-test_datasets = ['DUT-OMRON', 'DUTS-test', 'ECSSD', 'HKU-IS', 'Judd-A', 'MSRA-B-test', 'MSRA10K',
-                 'PASCAL-S', 'SED2', 'SOC-test', 'SOD', 'THUR15K']
+test_datasets = ['DUT-OMRON', 'DUTS-test', 'HKU-IS']
 for dataset in test_datasets:
     save_path = './res/{}/'.format(opt.snapshot.split('/')[-2]) + dataset + '/'
     if not os.path.exists(save_path):
         os.makedirs(save_path)
 
-    image_root = dataset_path + 'SalMap/' + dataset + '/'
+    image_root = dataset_path + 'IMG/' + dataset + '/'
     gt_root = dataset_path + 'GT/' + dataset + '/'
-    # depth_root = dataset_path + dataset + '/depth/'
 
     test_loader = test_dataset(image_root, gt_root, gt_root, opt.testsize)
     for i in range(test_loader.size):
