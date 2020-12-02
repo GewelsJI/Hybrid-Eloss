@@ -40,21 +40,22 @@ Here, we provide a toy demo of our Hybrid Eloss.
 ```python
 # -*- coding: utf-8 -*-
 import torch
+from scripts.SINet.lib.SINet import SINet_ResNet50 as model
 from Hybrid_Eloss import hybrid_e_loss
 
 # set the hyper-parameters
-bs, c, w, h = 2, 1, 352, 352
 learning_rate = 1e-6
 epoch = 100
 
 # get your prediction map with CUDA mode
-pred = torch.randn(bs, c, w, h).cuda() # bs, c, w, h
-gt = torch.randn(bs, c, w, h).cuda()
+img = torch.randn(2, 3, 352, 352).cuda() # bs, c, w, h
+pred = torch.randn(2, 1, 352, 352).cuda()
+gt = torch.randn(2, 1, 352, 352).cuda()
 
 
 for i in range(epoch):
     # 1. define forward pass
-    pred = model(x)
+    pred = model(img)
     # 2. compute loss
     loss = hybrid_e_loss(pred, gt)
     # 3. backprop and update weights
@@ -79,7 +80,7 @@ Before the experiments, please download the necessary files from Cowtransfer Dri
 
 2. The pre-trained weights generated from corresponding methods with different types of loss functions can be downloaded from this [link](https://gepengji.cowtransfer.com/s/87a0b066630f40). Note that there are three tasks in our extension experiments, and thus, please move three snapshots to the corresponding path: `./scripts/SCRN/snapshots/`, `./scripts/SINet/snapshots/`, and `./scripts/PraNet/snapshots/`, respectively.
 
-3. The prediction map can be downloaded from [link]([https://](https://gepengji.cowtransfer.com/s/d27056171c6049)). Similar to the last operation, please move three snapshots to the corresponding path: `./scripts/SCRN/res/`, `./scripts/SINet/res/`, and `./scripts/PraNet/res/`, respectively.
+3. The prediction map can be downloaded from [link](https://gepengji.cowtransfer.com/s/d27056171c6049). Similar to the last operation, please move three snapshots to the corresponding path: `./scripts/SCRN/res/`, `./scripts/SINet/res/`, and `./scripts/PraNet/res/`, respectively.
 
 ### Task-1: Salient Object detection
 

@@ -15,17 +15,17 @@ close all;
 clc;
 
 % ---- 1. ResultMap Path Setting ----
-ResultMapPath = '/media/nercms/NERCMS/GepengJi/E-m-Journal/2020-SciChina-Eloss/scripts/PraNet/res/';
-% Models = {'1012_PraNet_bei', '1013_PraNet_e', '1013_PraNet_wce', '1013_PraNet_wiou', '1020_PraNet_wiou_80', '1020_PraNet_wiou_90', '1020_PraNet_bei'}; %{'UNet','UNet++','PraNet','SFA'};
-Models = {'1013_PraNet_wce', '1020_PraNet_wiou_90', '1013_PraNet_e', '1012_PraNet_bei'};
+ResultMapPath = '../res/';
+
+Models = {'PraNet_wce', 'PraNet_wiou', 'PraNet_e', 'PraNet_bei'};
 modelNum = length(Models);
 
 % ---- 2. Ground-truth Datasets Setting ----
-DataPath = '/media/nercms/NERCMS/GepengJi/Medical_Seqmentation/PraNet_Submit/data/Dataset_Collection/';
-% Datasets = {'Kvasir', 'CVC-300', 'CVC-ClinicDB', 'CVC-ColonDB', 'ETIS-LaribPolypDB'}; %{'CVC-ClinicDB', 'CVC-ColonDB','ETIS-LaribPolypDB', 'Kvasir','CVC-300'};
-Datasets = {'Kvasir'};
+DataPath = '../../../data/PSeg/TestDataset//';
+Datasets = {'Kvasir', 'CVC-300', 'CVC-ClinicDB'};
+
 % ---- 3. Evaluation Results Save Path Setting ----
-ResDir = './EvaluationResults_PraNet/';
+ResDir = './EvaluationResults/';
 ResName='_result.txt';  % You can change the result name.
 
 Thresholds = 1:-1/255:0;
@@ -59,7 +59,7 @@ for d = 1:datasetNum
         
         [Smeasure, wFmeasure, MAE] =deal(zeros(1,imgNUM));
         
-        for i = 1:imgNUM
+        parfor i = 1:imgNUM
             name =  imgFiles(i).name;
             fprintf('Evaluating(%s Dataset,%s Model, %s Image): %d/%d\n',dataset, model, name, i,imgNUM);
             
@@ -150,7 +150,7 @@ for d = 1:datasetNum
         meanIoU = mean(column_IoU);
         maxIoU = max(column_IoU);
         
-        save([ResPath model],'Sm','threshold_Emeasure','Smeasure', 'mae', 'column_Dic', 'column_Sen', 'column_Spe', 'column_E','column_IoU','maxDic','maxEm','maxSen','maxSpe','maxIoU','meanIoU','meanDic','meanEm','meanSen','meanSpe');
+        save([ResPath model],'Sm', 'mae', 'column_Dic', 'column_Sen', 'column_Spe', 'column_E','column_IoU','maxDic','maxEm','maxSen','maxSpe','maxIoU','meanIoU','meanDic','meanEm','meanSen','meanSpe');
         fprintf(fileID, '(Dataset:%s; Model:%s) meanDic:%.3f;meanIoU:%.3f;wFm:%.3f;Sm:%.3f;meanEm:%.3f;MAE:%.3f;maxEm:%.3f;maxDice:%.3f;maxIoU:%.3f;meanSen:%.3f;maxSen:%.3f;meanSpe:%.3f;maxSpe:%.3f.\n',dataset,model,meanDic,meanIoU,wFm,Sm,meanEm,mae,maxEm,maxDic,maxIoU,meanSen,maxSen,meanSpe,maxSpe);
         fprintf('(Dataset:%s; Model:%s) meanDic:%.3f;meanIoU:%.3f;wFm:%.3f;Sm:%.3f;meanEm:%.3f;MAE:%.3f;maxEm:%.3f;maxDice:%.3f;maxIoU:%.3f;meanSen:%.3f;maxSen:%.3f;meanSpe:%.3f;maxSpe:%.3f.\n',dataset,model,meanDic,meanIoU,wFm,Sm,meanEm,mae,maxEm,maxDic,maxIoU,meanSen,maxSen,meanSpe,maxSpe);
     end
