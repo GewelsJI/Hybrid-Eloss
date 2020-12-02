@@ -23,6 +23,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JupyterTrust" id="17576b15-dea7-40fb-b588-31823944defe" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="111" />
+    <option name="y" value="132" />
+    <option name="width" value="1206" />
+    <option name="height" value="768" />
+  </component>
   <component name="ProjectId" id="1l0DyXvuJqUZJnoqs6zphuv8qo4" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -31,6 +37,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../2021-ICCV-VOS" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
