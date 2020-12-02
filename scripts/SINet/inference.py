@@ -10,9 +10,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--testsize', type=int, default=352, help='testing size')
 parser.add_argument('--gpu_id', type=str, default='1', help='select gpu id')
 parser.add_argument('--snapshot', type=str,
-                    default='./snapshot/1012_SINet_wiou/Net_epoch_best.pth')
+                    default='./snapshot/SINet_bei/Net_epoch_best.pth')
 parser.add_argument('--test_path', type=str,
-                    default='/media/nercms/NERCMS/GepengJi/2020ACMMM/Dataset/COD_New_data/TestDataset/', help='test dataset path')
+                    default='../../data/COS/TestDataset/', help='test dataset path')
 opt = parser.parse_args()
 
 dataset_path = opt.test_path
@@ -31,7 +31,7 @@ for dataset in test_datasets:
         os.makedirs(save_path)
     image_root = dataset_path + dataset + '/Imgs/'
     gt_root = dataset_path + dataset + '/GT/'
-    # depth_root = dataset_path + dataset + '/depth/'
+
     test_loader = test_dataset(image_root, gt_root, opt.testsize)
     for i in range(test_loader.size):
         image, gt, name, image_for_post = test_loader.load_data()

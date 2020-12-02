@@ -130,13 +130,13 @@ if __name__ == '__main__':
     parser.add_argument('--decay_epoch', type=int, default=60, help='every n epochs decay learning rate')
     parser.add_argument('--load', type=str, default=None, help='train from checkpoints')
     parser.add_argument('--gpu_id', type=str, default='0', help='train use gpu')
-    parser.add_argument('--train_root', type=str, default='/media/nercms/NERCMS/GepengJi/2020ACMMM/Dataset/COD_New_data/TrainDataset/',
+    parser.add_argument('--train_root', type=str, default='../../data/COS/TrainDataset/',
                         help='the training rgb images root')
-    parser.add_argument('--val_root', type=str, default='/media/nercms/NERCMS/GepengJi/2020ACMMM/Dataset/COD_New_data/TestDataset/COD10K/',
+    parser.add_argument('--val_root', type=str, default='../../data/COS/TestDataset/COD10K/',
                         help='the test rgb images root')
     parser.add_argument('--loss_type', type=str, default='bei', help='the type of loss function')
-    parser.add_argument('--save_path', type=str,
-                        default='./snapshot/1011_SINet_bei/', help='the path to save model and log')
+    # parser.add_argument('--save_path', type=str,
+    #                     default='./snapshot/1011_SINet_bei/', help='the path to save model and log')
     opt = parser.parse_args()
 
     # loss selection
@@ -162,15 +162,15 @@ if __name__ == '__main__':
 
     # build the model
     model = SINet_ResNet50(channel=32).cuda()
-    # model = torch.nn.DataParallel(model, device_ids=[0, 1])
 
+    # load weight
     if opt.load is not None:
         model.load_state_dict(torch.load(opt.load))
         print('load model from ', opt.load)
 
     optimizer = torch.optim.Adam(model.parameters(), opt.lr)
 
-    save_path = opt.save_path
+    save_path = './snapshot/SINet_{}/'.format(opt.loss_type)
     if not os.path.exists(save_path):
         os.makedirs(save_path)
 

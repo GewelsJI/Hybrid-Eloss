@@ -34,3 +34,5 @@
 ./ignore/*
 ./.idea/*
 ./.vscode/*
+
+*.pth
