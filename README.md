@@ -40,7 +40,6 @@ Here, we provide a toy demo of our Hybrid Eloss.
 ```python
 # -*- coding: utf-8 -*-
 import torch
-import
 from Hybrid_Eloss import hybrid_e_loss
 
 # set the hyper-parameters
@@ -72,62 +71,60 @@ To verify the effectiveness of our Hybrid Eloss, we employ it to existing task i
     </em>
 </p>
 
+### Data Preparation
+
+Before the experiments, please download the necessary files from Cowtransfer Drive:
+
+1. Training/Testing dataset used in our paper can be downloaded from this [link](https://gepengji.cowtransfer.com/s/8072c149efae41). Put them into `./data/`.
+
+2. The pre-trained weights generated from corresponding methods with different types of loss functions can be downloaded from this [link](https://gepengji.cowtransfer.com/s/87a0b066630f40). Note that there are three tasks in our extension experiments, and thus, please move three snapshots to the corresponding path: `./scripts/SCRN/snapshots/`, `./scripts/SINet/snapshots/`, and `./scripts/PraNet/snapshots/`, respectively.
+
+3. The prediction map can be downloaded from [link]([https://](https://gepengji.cowtransfer.com/s/d27056171c6049)). Similar to the last operation, please move three snapshots to the corresponding path: `./scripts/SCRN/res/`, `./scripts/SINet/res/`, and `./scripts/PraNet/res/`, respectively.
+
 ### Task-1: Salient Object detection
 
 The model, termed __SCRN__, is borrowed from __Stacked Cross Refinement Network for Edge-Aware Salient Object Detection__. (ICCV-2019, [GitHub](https://github.com/wuzhe71/SCRN), [Paper](http://openaccess.thecvf.com/content_ICCV_2019/papers/Wu_Stacked_Cross_Refinement_Network_for_Edge-Aware_Salient_Object_Detection_ICCV_2019_paper.pdf), [Supplementary Materials](http://openaccess.thecvf.com/content_ICCV_2019/supplemental/Wu_Stacked_Cross_Refinement_ICCV_2019_supplemental.pdf))
 
-- Data Preparation
-  
-  Download the training ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/f1a290c1a60e49)) and tetsting ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/f8bb4f9ae7dc48)) set and put it into `./data/SOD/`
-
 - Training
   
-  Choose the differnt type of loss function in parser (`--loss_type`) and just run `python ./scripts/SCRN/training.py`
+  Choose the differnt type of loss function in parser (`--loss_type`).  Change your directory (run `cd ./scripts/SCRN`) and start training (`python training.py`)
 
 - Testing
   
-  Download the pretrained weights ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/274315f1acc345)) and put them into `./snapshots/SCRN/`. Just run `python ./scripts/SCRN/inference.py`
+  Change your directory (`cd ./scripts/SCRN`) and start testing (`python inference.py`)
 
-- Results
-
-  Result map can be downloaded from this link: [Cowtransfer Drive](https://gepengji.cowtransfer.com/s/e08892ed817444).
+- Evaluation
+  
+  Change your directory (`cd ./scripts/SCRN/eval`) and run the evaluation code in the Matlab software (`matlab -nodesktop -nojvm -nodisplay -r main.m`).
 
 ### Task-2: Camouflaged Object Segmentation
 
 The model, termed SINet, is borrowed from Camouflaged Object Detection (CVPR-2020, [Github](https://github.com/DengPingFan/SINet), [Paper](https://openaccess.thecvf.com/content_CVPR_2020/papers/Fan_Camouflaged_Object_Detection_CVPR_2020_paper.pdf))
 
-- Data Preparation
-  
-  Download the training ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/1df86d459ada43)) and tetsting ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/4553588aa35a4d)) set and put it into `./data/COS/`.
-
 - Training
-
-  Choose the differnt type of loss function in parser (`--loss_type`) and just run `python ./scripts/SINet/training.py`
+  
+  Choose the differnt type of loss function in parser (`--loss_type`).  Change your directory (run `cd ./scripts/SINet`) and start training (`python training.py`)
 
 - Testing
   
-  Download the pretrained weights ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/2067945a233a41)) and put them into `./snapshots/SINet/`. Just run `python ./scripts/SINet/inference.py`
+  Change your directory (`cd ./scripts/SINet`) and start testing (`python inference.py`)
 
-- Results
-
-  Result map can be downloaded from this link: [Cowtransfer Drive](https://gepengji.cowtransfer.com/s/cc4f090df40543).
+- Evaluation
+  
+  Change your directory (`cd ./scripts/SINet/eval`) and run the evaluation code in the Matlab software (`matlab -nodesktop -nojvm -nodisplay -r main.m`).
 
 ### Task-3: Polyp Segmentation
 
 The model, termed __PraNet__, is borrowed from __Parallel Reverse Attention Network for Polyp Segmentation__ (MICCAI-2020, [GitHub](https://github.com/DengPingFan/PraNet), [Paper](https://github.com/DengPingFan/PraNet/blob/master))
 
-- Data Preparation
-  
-  Download the training ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/f3a7231302294e)) and tetsting ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/278951de7c9840)) set and put it into `./data/PSeg/`.
-
 - Training
-
-  Choose the differnt type of loss function in parser (`--loss_type`) and just run `python ./scripts/PraNet/training.py`
+  
+  Choose the differnt type of loss function in parser (`--loss_type`).  Change your directory (run `cd ./scripts/PraNet`) and start training (`python training.py`)
 
 - Testing
   
-  Download the pretrained weights ([Cowtransfer Drive](https://gepengji.cowtransfer.com/s/4b13c2f6161a49)) and put them into `./snapshots/PraNet/`. Just run `python ./scripts/PraNet/inference.py`
+  Change your directory (`cd ./scripts/PraNet`) and start testing (`python inference.py`)
 
-- Results
+- Evaluation
 
-  Result map can be downloaded from this link: [Cowtransfer Drive](https://gepengji.cowtransfer.com/s/021f962d99b54d).
+  Change your directory (`cd ./scripts/PraNet/eval`) and run the evaluation code in the Matlab software (`matlab -nodesktop -nojvm -nodisplay -r main.m`).
