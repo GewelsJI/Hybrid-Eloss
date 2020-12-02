@@ -10,9 +10,9 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--testsize', type=int, default=352, help='testing size')
 parser.add_argument('--gpu_id', type=str, default='1', help='select gpu id')
 parser.add_argument('--snapshot', type=str,
-                    default='./snapshot/1020_PraNet_wiou/Net_epoch_80.pth')
+                    default='./snapshot/PraNet_bei/Net_epoch_best.pth')
 parser.add_argument('--test_path', type=str,
-                    default='/media/nercms/NERCMS/GepengJi/Medical_Seqmentation/PraNet_Submit/data/Dataset_Collection/', help='test dataset path')
+                    default='../../data/PSeg/TestDataset/', help='test dataset path')
 opt = parser.parse_args()
 
 dataset_path = opt.test_path
@@ -24,7 +24,7 @@ model.cuda()
 model.eval()
 
 # test
-test_datasets = ['CVC-300', 'CVC-ClinicDB', 'CVC-ColonDB', 'ETIS-LaribPolypDB', 'Kvasir']
+test_datasets = ['CVC-300', 'CVC-ClinicDB', 'Kvasir']
 for dataset in test_datasets:
     save_path = './res/{}/'.format(opt.snapshot.split('/')[-2]) + dataset + '/'
     if not os.path.exists(save_path):

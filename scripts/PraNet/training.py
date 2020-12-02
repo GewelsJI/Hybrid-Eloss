@@ -129,12 +129,10 @@ if __name__ == '__main__':
     parser.add_argument('--load', type=str, default=None, help='train from checkpoints')
     parser.add_argument('--gpu_id', type=str, default='0', help='train use gpu')
     parser.add_argument('--loss_type', type=str, default='bei', help='the type of loss function')
-    parser.add_argument('--train_root', type=str, default='/media/nercms/NERCMS/GepengJi/Medical_Seqmentation/PraNet_Submit/data/merge_train/',
+    parser.add_argument('--train_root', type=str, default='../../data/PSeg/TrainDataset/',
                         help='the training rgb images root')
-    # parser.add_argument('--val_root', type=str, default='/media/nercms/NERCMS/GepengJi/2020ACMMM/Dataset/COD_New_data/TestDataset/COD10K/',
-    #                     help='the test rgb images root')
-    parser.add_argument('--save_path', type=str,
-                        default='./snapshot/1020_PraNet_bei/', help='the path to save model and log')
+    parser.add_argument('--val_root', type=str, default='../../data/PSeg/TestDataset/Kvasir/',
+                        help='the test rgb images root')
     opt = parser.parse_args()
 
     # loss selection
@@ -160,7 +158,6 @@ if __name__ == '__main__':
 
     # build the model
     model = PraNet(channel=32).cuda()
-    # model = torch.nn.DataParallel(model, device_ids=[0, 1])
 
     if opt.load is not None:
         model.load_state_dict(torch.load(opt.load))
@@ -168,19 +165,19 @@ if __name__ == '__main__':
 
     optimizer = torch.optim.Adam(model.parameters(), opt.lr)
 
-    save_path = opt.save_path
+    save_path = './snapshot/PraNet_{}/'.format(opt.loss_type)
     if not os.path.exists(save_path):
         os.makedirs(save_path)
 
     # load data
     print('load data...')
-    train_loader = get_loader(image_root=opt.train_root + 'image/',
-                              gt_root=opt.train_root + 'mask/',
+    train_loader = get_loader(image_root=opt.train_root + 'images/',
+                              gt_root=opt.train_root + 'masks/',
                               batchsize=opt.batchsize,
                               trainsize=opt.trainsize,
                               num_workers=8)
-    val_loader = test_dataset(image_root='/media/nercms/NERCMS/GepengJi/Medical_Seqmentation/PraNet_Submit/data/Dataset_Collection/Kvasir/images/',
-                              gt_root='/media/nercms/NERCMS/GepengJi/Medical_Seqmentation/PraNet_Submit/data/Dataset_Collection/Kvasir/masks/',
+    val_loader = test_dataset(image_root=opt.val_root + 'images/',
+                              gt_root=opt.val_root + 'masks/',
                               testsize=opt.trainsize)
     total_step = len(train_loader)
 

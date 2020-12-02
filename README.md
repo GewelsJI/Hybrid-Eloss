@@ -50,7 +50,6 @@ epoch = 100
 
 # get your prediction map with CUDA mode
 pred = torch.randn(bs, c, w, h).cuda() # bs, c, w, h
-# get your ground-truth mask with CUDA mode
 gt = torch.randn(bs, c, w, h).cuda()
 
 

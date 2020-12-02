@@ -43,7 +43,7 @@ def hybrid_e_loss(pred, mask):
     :param mask:
     :return:
     """
-    # adaptive weighting mask
+    # adaptive weighting masks
     weit = 1 + 5 * torch.abs(F.avg_pool2d(mask, kernel_size=31, stride=1, padding=15) - mask)
 
     # weighted binary cross entropy loss function
