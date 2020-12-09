@@ -1,6 +1,7 @@
 # Hybrid Eloss for object segmentation in PyTorch
 
 The official pytorch implemention of the paper "Cognitive Vision Inspired Object Segmentation Metric and Loss Function"
+PDF: http://dpfan.net/wp-content/uploads/Scichina2021_Eloss.pdf
 
 ## Introduction
 
