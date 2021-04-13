@@ -130,3 +130,27 @@ The model, termed __PraNet__, is borrowed from __Parallel Reverse Attention Netw
 - Evaluation
 
   Change your directory (`cd ./scripts/PraNet/eval`) and run the evaluation code in the Matlab software (`matlab -nodesktop -nojvm -nodisplay -r main.m`).
+
+## Reference
+
+    @ARTICLE{21Fan_HybridLoss,
+        author={范登平 and 季葛鹏 and 秦雪彬 and 程明明},
+        journal={中国科学：信息科学}, 
+        title={认知视觉启发的物体分割评价标准及损失函数}, 
+        year={2021},
+        volume={},
+        number={},
+        pages={},
+        doi={10.1360/SSI-2020-0370}
+    }
+
+    @article{21Fan_HybridLoss,
+      title={Cognitive Vision Inspired Object Segmentation Metric and Loss Function},
+      author={Fan, Deng-Ping and Ji, Ge-Peng and Qin, Xuebin and Cheng, Ming-Ming},
+      journal={SCIENTIA SINICA Informationis},
+      year={2021},
+      volume={}, 
+      number={},
+      doi={10.1360/SSI-2020-0370},
+      publisher={Science China Press}
+    }
