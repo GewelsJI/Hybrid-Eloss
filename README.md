@@ -101,7 +101,7 @@ The model, termed __SCRN__, is borrowed from __Stacked Cross Refinement Network 
 
 ### Task-2: Camouflaged Object Segmentation
 
-The model, termed SINet, is borrowed from Camouflaged Object Detection (CVPR-2020, [Github](https://github.com/DengPingFan/SINet), [Paper](https://openaccess.thecvf.com/content_CVPR_2020/papers/Fan_Camouflaged_Object_Detection_CVPR_2020_paper.pdf))
+The model, termed **SINet**, is borrowed from **Camouflaged Object Detection** (CVPR-2020, [Github](https://github.com/DengPingFan/SINet), [Paper](https://openaccess.thecvf.com/content_CVPR_2020/papers/Fan_Camouflaged_Object_Detection_CVPR_2020_paper.pdf))
 
 - Training
   
