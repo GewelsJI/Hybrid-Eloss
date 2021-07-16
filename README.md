@@ -77,7 +77,7 @@ To verify the effectiveness of our Hybrid Eloss, we employ it to existing task i
 
 Before the experiments, please download the necessary files from Cowtransfer Drive:
 
-1. Training/Testing dataset used in our paper can be downloaded from this [link](https://gepengji.cowtransfer.com/s/8072c149efae41). Put them into `./data/`.
+1. Training/Testing dataset used in our paper can be downloaded from this [link](https://pan.baidu.com/s/10kImoHQ59t_kMXTQT4W3gg) (code: smnp). Put them into `./data/`.
 
 2. The pre-trained weights generated from corresponding methods with different types of loss functions can be downloaded from this [link](https://gepengji.cowtransfer.com/s/87a0b066630f40). Note that there are three tasks in our extension experiments, and thus, please move three snapshots to the corresponding path: `./scripts/SCRN/snapshots/`, `./scripts/SINet/snapshots/`, and `./scripts/PraNet/snapshots/`, respectively.
 
