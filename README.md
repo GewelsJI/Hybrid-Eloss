@@ -77,11 +77,11 @@ To verify the effectiveness of our Hybrid Eloss, we employ it to existing task i
 
 Before the experiments, please download the necessary files from Cowtransfer Drive:
 
-1. Training/Testing dataset used in our paper can be downloaded from this [link](https://pan.baidu.com/s/10kImoHQ59t_kMXTQT4W3gg) (code: smnp). Put them into `./data/`.
+1. Training/Testing dataset used in our paper can be downloaded from [baidu drive](https://pan.baidu.com/s/10k18ATzXT--G6C5uvEyfIA?pwd=5mdp). Put them into `./data/`.
 
-2. The pre-trained weights generated from corresponding methods with different types of loss functions can be downloaded from this [link](https://gepengji.cowtransfer.com/s/87a0b066630f40). Note that there are three tasks in our extension experiments, and thus, please move three snapshots to the corresponding path: `./scripts/SCRN/snapshots/`, `./scripts/SINet/snapshots/`, and `./scripts/PraNet/snapshots/`, respectively.
+2. The pre-trained weights generated from corresponding methods with different types of loss functions can be downloaded from this [baidu drive](https://pan.baidu.com/s/1d_Rr59Ol-7ji5_EVj9-hYQ?pwd=stfq). Note that there are three tasks in our extension experiments, and thus, please move three snapshots to the corresponding path: `./scripts/SCRN/snapshots/`, `./scripts/SINet/snapshots/`, and `./scripts/PraNet/snapshots/`, respectively.
 
-3. The prediction map can be downloaded from [link](https://gepengji.cowtransfer.com/s/d27056171c6049). Similar to the last operation, please move three snapshots to the corresponding path: `./scripts/SCRN/res/`, `./scripts/SINet/res/`, and `./scripts/PraNet/res/`, respectively.
+3. The prediction map can be downloaded from [baidu drive](https://pan.baidu.com/s/1e2ntRaG0OgPxE_XqMLlSPw?pwd=nimq). Similar to the last operation, please move three snapshots to the corresponding path: `./scripts/SCRN/res/`, `./scripts/SINet/res/`, and `./scripts/PraNet/res/`, respectively.
 
 ### Task-1: Salient Object detection
 
