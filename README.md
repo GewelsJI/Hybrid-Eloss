@@ -143,14 +143,14 @@ The model, termed __PraNet__, is borrowed from __Parallel Reverse Attention Netw
         pages={},
         doi={10.1360/SSI-2020-0370}
     }
-
-    @article{21Fan_HybridLoss,
+    
+    @article{fan2021cognitive,
       title={Cognitive Vision Inspired Object Segmentation Metric and Loss Function},
       author={Fan, Deng-Ping and Ji, Ge-Peng and Qin, Xuebin and Cheng, Ming-Ming},
       journal={SCIENTIA SINICA Informationis},
       year={2021},
-      volume={}, 
-      number={},
+      volume={51}, 
+      number={9},
       doi={10.1360/SSI-2020-0370},
       publisher={Science China Press}
     }
